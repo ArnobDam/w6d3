@@ -11,6 +11,7 @@ class UsersController < ApplicationController
         # user.save!
         # render json: user
 
+        debugger
         if user.save
             render json: user
         else
@@ -19,6 +20,10 @@ class UsersController < ApplicationController
     end
 
     def show
-        render json: params
+        render json: User.find(params[:id])
+    end
+
+    def update
+        
     end
 end
