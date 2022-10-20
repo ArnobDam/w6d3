@@ -7,11 +7,16 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.destroy_all
+Artwork.destroy_all
 
 ApplicationRecord.connection.reset_pk_sequence!('users')
+ApplicationRecord.connection.reset_pk_sequence!('artworks')
 
 ApplicationRecord.transaction do
     puts 'Loading users...'
     require_relative 'data/users.rb'
+    puts 'Loading artworks...'
+    require_relative 'data/artworks.rb'
+    puts
     puts 'Done!'
 end

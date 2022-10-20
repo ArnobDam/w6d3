@@ -43,13 +43,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_153044) do
     t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "fave_color_id"
-    t.index ["fave_color_id"], name: "index_users_on_fave_color_id"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "artwork_shares", "artworks"
   add_foreign_key "artwork_shares", "users", column: "viewer_id"
   add_foreign_key "artworks", "users", column: "artist_id"
-  add_foreign_key "users", "colors", column: "fave_color_id"
 end
