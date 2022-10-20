@@ -19,7 +19,15 @@ class ArtworksController < ApplicationController
     end
 
     def update
-        
+        # find associated artwork
+        artwork = Artwork.find(params[:id])
+
+        artwork.update(artwork_params)
+        if artwork.save
+            render json: artwork
+        else
+            render json: artwork.errors.full_messages, status: :unprocessable_entity
+        end
     end
 
     def destroy
