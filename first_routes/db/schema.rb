@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_20_180145) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_20_183331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,8 +19,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_180145) do
     t.integer "viewer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["artwork_id"], name: "index_artwork_shares_on_artwork_id", unique: true
-    t.index ["viewer_id"], name: "index_artwork_shares_on_viewer_id", unique: true
+    t.index ["artwork_id", "viewer_id"], name: "index_artwork_shares_on_artwork_id_and_viewer_id", unique: true
+    t.index ["artwork_id"], name: "index_artwork_shares_on_artwork_id"
+    t.index ["viewer_id"], name: "index_artwork_shares_on_viewer_id"
   end
 
   create_table "artworks", force: :cascade do |t|
@@ -43,10 +44,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_180145) do
     t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "fave_color_id"
+    t.index ["fave_color_id"], name: "index_users_on_fave_color_id"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "artwork_shares", "artworks"
   add_foreign_key "artwork_shares", "users", column: "viewer_id"
   add_foreign_key "artworks", "users", column: "artist_id"
+  add_foreign_key "users", "colors", column: "fave_color_id"
 end
