@@ -29,4 +29,13 @@ class Artwork < ApplicationRecord
     has_many :shared_viewers,
         through: :artwork_shares,
         source: :viewer
+
+    def self.artworks_for_user_id(user_id)
+        # artworks_hash = {}
+        # artworks_hash[:artworks] = User.find(user_id).artworks
+        # artworks_hash[:shared_artworks] = User.find(user_id).shared_artworks
+        artworks_arr = []
+        artworks_arr << User.find(user_id).artworks
+        artworks_arr << User.find(user_id).shared_artworks
+    end
 end

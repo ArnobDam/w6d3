@@ -11,13 +11,15 @@ class ArtworksController < ApplicationController
 
         # artworks_hash[:artworks] = Artwork.where(artist_id: params[:users.id])
         # artworks_hash[:shared_artworks] = Artwork.where(artist_id: params[:users.id])
-        render json: Artwork.all
+        render json: Artwork.artworks_for_user_id(params[:user_id])
         # user_id = params[:artist_id]
         # artworks_hash = {}
         # artworks_hash[:artworks] = User.find_by(user_id).artworks
         # artworks_hash[:shared_artworks] = User.find_by(user_id).shared_artworks
         # render json: User.find(user_id).artworks
         # render json: User.find(user_id).shared_artworks
+
+
 
         # render json: artworks_hash
     end
