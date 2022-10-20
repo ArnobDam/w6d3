@@ -1,15 +1,25 @@
 class ArtworksController < ApplicationController
 
     def index
-        # render json: Artwork.all
-        user_id = params[:artist_id]
-        render json: User.find(user_id).artworks
-        render json: User.find(user_id).shared_artworks
+        # artworks_hash = {}
+        # if params.has_key?(:id)
+        #     artworks_hash[:artworks] = User.find_by(:id).artworks
+        #     artworks_hash[:shared_artworks] = User.find_by(:id).shared_artworks
+        # else
+            # artworks_hash[:artworks] = Artwork.all
+        # end
 
+        # artworks_hash[:artworks] = Artwork.where(artist_id: params[:users.id])
+        # artworks_hash[:shared_artworks] = Artwork.where(artist_id: params[:users.id])
+        render json: Artwork.all
+        # user_id = params[:artist_id]
+        # artworks_hash = {}
+        # artworks_hash[:artworks] = User.find_by(user_id).artworks
+        # artworks_hash[:shared_artworks] = User.find_by(user_id).shared_artworks
+        # render json: User.find(user_id).artworks
+        # render json: User.find(user_id).shared_artworks
 
-
-        # render json: Artwork.find(params[:artist_id])
-        # render json: Artwork.find(params[:artist_id]).all
+        # render json: artworks_hash
     end
 
     def create
@@ -22,9 +32,16 @@ class ArtworksController < ApplicationController
         end
     end
 
-    # def show
-    #     render json: Artwork.find(params[:id])
-    # end
+    def show
+        render json: Artwork.find(params[:id])
+
+        # user_id = params[:artist_id]
+        # artworks_hash = {}
+        # artworks_hash[:artworks] = User.find_by(user_id).artworks
+        # artworks_hash[:shared_artworks] = User.find_by(user_id).shared_artworks
+
+        # render json: artworks_hash
+    end
 
     def update
         # find associated artwork
