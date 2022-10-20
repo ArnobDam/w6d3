@@ -1,7 +1,15 @@
 class ArtworksController < ApplicationController
 
     def index
-        render json: Artwork.all
+        # render json: Artwork.all
+        user_id = params[:artist_id]
+        render json: User.find(user_id).artworks
+        render json: User.find(user_id).shared_artworks
+
+
+
+        # render json: Artwork.find(params[:artist_id])
+        # render json: Artwork.find(params[:artist_id]).all
     end
 
     def create
@@ -14,9 +22,9 @@ class ArtworksController < ApplicationController
         end
     end
 
-    def show
-        render json: Artwork.find(params[:id])
-    end
+    # def show
+    #     render json: Artwork.find(params[:id])
+    # end
 
     def update
         # find associated artwork
